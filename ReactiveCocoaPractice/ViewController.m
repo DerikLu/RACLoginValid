@@ -16,11 +16,15 @@
 @implementation ViewController
 
 - (void)initView {
-    //UserName signal
+    self.lblStatus.text = @"Login Service";
+    
+    //UserName signal (6 characters)
+    @weakify(self)
     RACSignal *validUsernameSignal = [[self.txtUserName.rac_textSignal filter:^BOOL(NSString *text) {
         return text.length > 0;
     }] map:^id(NSString *text) {
-        return @(text.length == 6);
+        @strongify(self)
+        return @([self isValidUserName:text]);
     }];
     
     RAC(self.lblUserNameMark, text) = [validUsernameSignal map:^id(NSNumber *value) {
@@ -39,11 +43,12 @@
         }
     }];
     
-    //Password signal
+    //Password signal (more than 8 characters)
     RACSignal *validPwdSignal = [[self.txtPwd.rac_textSignal filter:^BOOL(NSString *text) {
         return text.length > 0;
     }] map:^id(NSString *text) {
-        return @(text.length > 0);
+        @strongify(self)
+        return @([self isValidPassword:text]);
     }];
     
     RAC(self.lblPwdMark, text) = [validPwdSignal map:^id(NSNumber *value) {
@@ -71,6 +76,47 @@
     RAC(self.btnLogin, enabled) = [signUpActiveSignal map:^id(NSNumber *valid) {
         return valid;
     }];
+    
+    [[[[self.btnLogin
+        rac_signalForControlEvents:UIControlEventTouchUpInside]
+        doNext:^(id x) {
+            @strongify(self)
+            self.btnLogin.enabled = NO;
+            self.txtUserName.enabled = NO;
+            self.txtPwd.enabled = NO;
+            self.lblStatus.text = @"Connecting...";
+        }]
+        flattenMap:^id(id x) {
+            @strongify(self)
+            return [self signInSignal];
+        }]
+        subscribeNext:^(NSNumber *signedIn) {
+            @strongify(self)
+            [self performSelector:@selector(successLogin:) withObject:signedIn afterDelay:3.0];
+        }];
+}
+
+- (RACSignal *)signInSignal {
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        //Request login service and feedback
+        [subscriber sendNext:@(YES)];
+        [subscriber sendCompleted];
+        return nil;
+    }];
+}
+
+- (void)successLogin:(NSNumber *)signedIn {
+    self.btnLogin.enabled = YES;
+    self.txtUserName.enabled = YES;
+    self.txtPwd.enabled = YES;
+    
+    BOOL success = [signedIn boolValue];
+    
+    if (success) {
+        self.lblStatus.text = @"Success!";
+    } else {
+        self.lblStatus.text = @"Failed!";
+    }
 }
 
 - (void)viewDidLoad {
@@ -85,7 +131,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)login:(id)sender {
-    NSLog(@"click");
+- (BOOL)isValidUserName:(NSString *)text {
+    return text.length == 6;
 }
+
+- (BOOL)isValidPassword:(NSString *)text {
+    return text.length > 8;
+}
+
 @end

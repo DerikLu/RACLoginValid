@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FD11721C-C0AE-4EAB-8255-F7D86C1CA120</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ReactiveCocoaPractice</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F7F58B30108E9C459E4EE4C184F2351CE9498A65</key>
+		<string>https://github.com/DerikLu/RACLoginValid.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ReactiveCocoaPractice.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F7F58B30108E9C459E4EE4C184F2351CE9498A65</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/DerikLu/RACLoginValid.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F7F58B30108E9C459E4EE4C184F2351CE9498A65</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F7F58B30108E9C459E4EE4C184F2351CE9498A65</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RACLoginValid</string>
+		</dict>
+	</array>
+</dict>
+</plist>

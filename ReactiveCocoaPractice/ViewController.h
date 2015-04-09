@@ -16,8 +16,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *lblUserNameMark;
 @property (nonatomic, weak) IBOutlet UILabel *lblPwdMark;
-
-- (IBAction)login:(id)sender;
+@property (nonatomic, weak) IBOutlet UILabel *lblStatus;
 
 @end
 
